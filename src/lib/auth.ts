@@ -52,8 +52,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         password: {},
       },
       authorize: async (credentials) => {
-        console.log(credentials)
-
         const accessTokenRequest = await fetch(`${env.BACKEND_URL}/sessions`, {
           method: 'POST',
           headers: {
@@ -67,8 +65,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
         const accessTokenResponse =
           (await accessTokenRequest.json()) as Response<AccessToken>
-
-        console.log(accessTokenResponse)
 
         if (accessTokenRequest.status !== 201) {
           throw new Error(accessTokenResponse.error)
@@ -89,8 +85,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
         const userResponse =
           (await userRequest.json()) as Response<UserResponse>
-
-        console.log(userResponse)
 
         if (userRequest.status !== 200) {
           throw new Error(userResponse.error)
